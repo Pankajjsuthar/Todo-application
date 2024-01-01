@@ -1,48 +1,57 @@
 import React, { useState } from "react";
+import axios from "axios";
+import "../style/signup.css"; // Import your CSS file for styling
 
 const Signup = () => {
-  const [formdata, setFormdata] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(e);
-    setFormdata(e);
-    // console.log(formdata);
+
     try {
-      const response = await fetch("http://localhost:3000/user/signup", {
-        method: "POST",
-        headers : {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(e),
-      });
+      const response = await axios.post("http://localhost:3000/user/signup", formData);
 
-      if(response.ok){
-
-        console.log("Signup successfull.");
-      }
-      else{
+      if (response.status === 200) {
+        console.log("Signup successful.");
+      } else {
         console.log("Error");
       }
-    } catch {
-        console.log("Error while signing up.");
+    } catch (error) {
+      console.error("Error while signing up:", error.message);
     }
   };
 
-  return(
-    <div>
-        <form>
-            <label >Email</label>
-            <input type="email" id="email" name="email" required></input>
-            <br></br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required></input>
-            <br></br>
-            <button onClick={handleSubmit} type="submit" value="Sign Up">Sign Up</button>
-        </form>
+  return (
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit" onSubmit={handleSubmit}>Sign Up</button>
+      </form>
     </div>
   );
 };

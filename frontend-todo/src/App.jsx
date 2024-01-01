@@ -1,43 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Signup from "./components/signup";
+import Login from "./components/login";
+import Todo from "./components/todos";
 import { ErrorBoundary } from "react-error-boundary";
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from "axios";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    // Fetch todos when the component mounts
-    fetch("http://localhost:3000/user/todo")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to fetch todos");
-        }
-      })
-      .then(async (data) => {
-        await setTodos(data);
-        console.log(todos);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
   
-  return (
-    <div>
 
-      <BrowserRouter>
-        <Routes>
-          <Route path ="/" element = {<Signup/>}/>
-          <Route path ="/login" element = {<Signup/>}/>
-          <Route path ="/todos" element = {<Signup/>}/>
-        </Routes>
-      </BrowserRouter>
-    </div>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/todos" element={<Todo/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/signup" element={<Signup/>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -57,7 +57,7 @@ app.post("/user/signup", (req, res) => {
   const {email,password} = req.body;
   User.findOne({email}).then((admin) => {
     if(admin){
-        res.status(403).json({message : "User already exists."});
+        res.status(406).json({message : "User already exists."});
     }
     else{
         const obj = {
