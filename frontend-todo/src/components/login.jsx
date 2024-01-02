@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const [formData,setFormData] = useState({
     email : "",
@@ -24,6 +27,7 @@ const Login = () => {
       if(response.status === 200){
         console.log(response.data.token);
         console.log("login successfull.");
+        navigate("/todos");
       }
       else{
         console.log("error while login.");
@@ -35,7 +39,10 @@ const Login = () => {
   }
   return (
     <div className="signup-container">
+
+      
       <form className="signup-form" onSubmit={handleSubmit}>
+      <h1>Login page</h1>
         <label>Email</label>
         <input
           type="email"
@@ -52,7 +59,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit" onSubmit={handleSubmit}>Sign Up</button>
+        <button type="submit" onSubmit={handleSubmit}>Login</button>
       </form>
     </div>
   )

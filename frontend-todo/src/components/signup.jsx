@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../style/signup.css"; // Import your CSS file for styling
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,6 +26,7 @@ const Signup = () => {
 
       if (response.status === 200) {
         console.log("Signup successful.");
+        navigate("/login");
       } else {
         console.log("Error");
       }
@@ -34,6 +38,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSubmit}>
+      <h1>Signup page</h1>
         <label>Email</label>
         <input
           type="email"
@@ -50,7 +55,7 @@ const Signup = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit" onSubmit={handleSubmit}>Sign Up</button>
+        <button type="submit" onSubmit={handleSubmit}>Sign up</button>
       </form>
     </div>
   );
