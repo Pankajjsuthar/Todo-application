@@ -2,7 +2,6 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from "axios";
 import '../style/todo.css';
-
 const Todos = () => {
 
     const [todos, setTodos] = useState([]);
@@ -11,7 +10,14 @@ const Todos = () => {
     useEffect(() => {
       const fetchTodos = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/user/todo");
+          const storedToken = sessionStorage.getItem("jwtToken");
+          const headers = {
+            // Set the Authorization header with the JWT token
+            Authorization: `Bearer ${storedToken}`,
+            // Other headers...
+          };
+          console.log(headers);
+          const response = await axios.get("http://localhost:3000/user/todo", {headers});
           await setTodos(prevTodos => [...prevTodos, ...response.data.todos]);
           console.log(todos);
           console.log(response.data.todos);
@@ -56,6 +62,7 @@ const Todos = () => {
       };
   
     return (
+      <div>
         <div className="todos-container">
       {todos.map(todo => (
         <div key={todo._id} className="todo-card">
@@ -74,6 +81,7 @@ const Todos = () => {
         <span className="add-icon">+</span>
         <p>Add a new todo</p>
       </div>
+    </div>
     </div>
     );
 }
