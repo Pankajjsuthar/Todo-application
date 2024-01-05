@@ -36,13 +36,13 @@ const authenticatejwt = (req, res, next) => {
     const token = auth.split(" ")[1];
     jwt.verify(token, secretKey, (err, user) => {
       if (err) {
-        res.sendStatus(500);
+        res.sendStatus(500).json({message : "verification error."});
       }
       req.user = user;
       next();
     });
   } else {
-    res.sendStatus(500);
+    res.sendStatus(500).json({message : "auth token not reached"});
   }
 };
 

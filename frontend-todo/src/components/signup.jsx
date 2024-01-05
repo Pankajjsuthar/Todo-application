@@ -47,7 +47,7 @@ const Signup = () => {
         height: "100%",
       }}
     >
-      <NavBar></NavBar>
+      <NavBar />
       <div className="signup-container">
         <form
           className="signup-form"
@@ -63,20 +63,22 @@ const Signup = () => {
             onChange={handleChange}
             value={formData.email}
             label="Email"
+            name="email"
             type="email"
             fullWidth
-          ></TextField>
+          />
           <TextField
             style={{
               marginTop: "10px",
             }}
             variant="outlined"
             onChange={handleChange}
-            value={formData.email}
+            value={formData.password}
             label="Password"
+            name="password"
             type="password"
             fullWidth
-          ></TextField>
+          />
           <Button
             style={{
               marginTop :"10px",
@@ -84,7 +86,6 @@ const Signup = () => {
               color : "white"
             }}
             type="submit"
-            onSubmit={handleSubmit}
           >
             Signup
           </Button>

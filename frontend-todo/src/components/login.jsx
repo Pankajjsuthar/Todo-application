@@ -6,7 +6,6 @@ import NavBar from "../components/NavBar";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,7 +20,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
       const response = await axios.post(
         "http://localhost:3000/user/login",
@@ -66,6 +65,7 @@ const Login = () => {
             value={formData.email}
             label="Email"
             type="email"
+            name="email"
             fullWidth
           ></TextField>
           <TextField
@@ -74,9 +74,10 @@ const Login = () => {
             }}
             variant="outlined"
             onChange={handleChange}
-            value={formData.email}
+            value={formData.password}
             label="Password"
             type="password"
+            name="password"
             fullWidth
           ></TextField>
           <Button
