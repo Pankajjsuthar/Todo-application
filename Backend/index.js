@@ -49,6 +49,10 @@ const authenticatejwt = (req, res, next) => {
 //connect db
 connectDB();
 
+app.get("/user/me",authenticatejwt,async (req,res) => {
+  await res.json({email : req.user.email});
+});
+
 app.post("/user/signup", (req, res) => {
   //checks if email already exists or not
   //add the email and password in the mongodb.

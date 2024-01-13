@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../style/todo.css';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import AddTodo from "../components/addTodo"; // Correct the import path
 
 const Todos = () => {
@@ -18,7 +19,7 @@ const Todos = () => {
           Authorization: `Bearer ${storedToken}`,
         };
         const response = await axios.get('http://localhost:3000/user/todo', { headers });
-        setTodos(prevTodos => [...prevTodos, ...response.data.todos]);
+        setTodos(response.data.todos);
       } catch (error) {
         console.error('Failed to fetch todos:', error);
       }
@@ -59,7 +60,10 @@ const Todos = () => {
 
   return (
     <div>
-      <div className="todos-container">
+      <NavBar></NavBar>
+      <div className="todos-container" style={{
+        marginTop: "20px"
+      }}>
         {todos.map(todo => (
           <div key={todo._id} className="todo-card">
             <div className="todo-header">
@@ -73,7 +77,7 @@ const Todos = () => {
             </div>
           </div>
         ))}
-        <div className="todo-card empty-card" onClick={openAddTodo}>
+        <div className="todo-card empty-card" onClick={"/addTodo"}>
           <span className="add-icon">+</span>
           <p>Add a new todo</p>
         </div>

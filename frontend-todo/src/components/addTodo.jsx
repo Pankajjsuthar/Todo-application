@@ -19,16 +19,11 @@ const AddTodo = () => {
     e.preventDefault();
     try {
       console.log(todo);
-      const response = await axios.post('http://localhost:3000/user/todo',todo,{
+      const response = await axios.post('http://localhost:3000/user/todo',todo, {
         headers : {
           'Content-Type' : 'application/json',
           'authorization' : `Bearer ${getToken()}`
-        },
-        data: {
-          "title" : todo.title,
-          "description" : todo.description
-        },
-        
+        }
       });
       if (response.status === 200) {
         console.log('Todo added successfully.');
