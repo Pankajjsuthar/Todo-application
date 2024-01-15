@@ -60,12 +60,17 @@ const Todos = () => {
 
   return (
     <div>
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <div className="todos-container" style={{
-        marginTop: "20px"
+        marginTop: "20px",
+        marginLeft : "40px",
+        backgroundColor: ""
       }}>
         {todos.map(todo => (
-          <div key={todo._id} className="todo-card">
+          <div key={todo._id} className="todo-card" style={{
+            color: "black",
+            backgroundColor : "rgba(206, 203, 246, 0.96)"
+          }}>
             <div className="todo-header">
               <h3>{todo.title}</h3>
               <span className="date-posted">{new Date(todo.date).toLocaleString()}</span>

@@ -43,12 +43,11 @@ const Login = () => {
   return (
     <div
       style={{
-        backgroundColor: "#ccc2fc",
         width: "100%",
         height: "100%",
       }}
     >
-      <NavBar></NavBar>
+      {/* <NavBar></NavBar> */}
       <div className="signup-container">
         <form
           className="signup-form"
